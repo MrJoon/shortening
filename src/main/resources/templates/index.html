@@ -41,15 +41,22 @@
 			text-align: right;
 		}
 	</style>
+	<script>
+			window.addEventListener("load", function () {
+				document.getElementById('saveForm').addEventListener("submit", function (e) {
+					document.getElementById("save").disabled = true;
+				});
+			});
+	</script>
 </head>
 
 <body>
 	<div class="w800">
-	<form th:action="@{/}" method="post">
+	<form th:action="@{/}" method="post" id="saveForm">
 		<div class="padding-bot">
 		URL : <input class="w650" type="text" name="url" th:value="${param.url}"
 			placeholder="ex) http://www.google.com or google.com">
-		<input type="submit" value="변경">
+		<input type="submit" id="save" value="변경">
 		</div>
 	</form>
 	<div class="line-top padding-top" th:if="${result == 'success'}">
