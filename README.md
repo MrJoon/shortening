@@ -3,13 +3,13 @@ URL을 입력받아 8자 이내의 단축 URL로 변경해 주는 서비스
 
 ### 개발 환경
 + Java 1.8
-+ Spring Boot
-+ H2 Database
-+ gradle
-+ JPA
-+ lombok
-+ thymeleaf
-+ JUnit
++ Spring Boot 2.1.6.RELEASE
++ H2 Database 1.4.199
++ gradle 5.4.1
++ Spring Data JPA 2.1.9
++ lombok 1.18.8
++ thymeleaf 3.0.11
++ JUnit 4.12
 
 ### 실행 방법
 전제 조건으로 jdk 1.8이 설치 되어 있어야 하며, 80포트가 사용중이 아니며, 방화벽이 오픈되어 있어야 합니다.
