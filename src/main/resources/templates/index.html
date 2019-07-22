@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>URL Shortening Service</title>
+	<style>
+		.ellipsis {
+			text-overflow: ellipsis;
+			overflow: hidden;
+			white-space: nowrap;
+			font-size: small;
+		}
+		
+		.input-url {
+			font-size: medium;
+			border: 0px;
+		}
+		.padding-top {
+			padding: 10px 0 0 0;
+		}
+		.padding-bot {
+			padding: 0 0 10px 0;
+		}
+		.line-top {
+			border-top: 1px solid;
+		}
+		.inline {
+			display: inline-block;
+		}
+		.w350 {
+			width: 350px;
+		}
+		.w650 {
+			width: 650px;
+		}
+		.w800 {
+			width: 800px;
+		}
+		.t-right {
+			text-align: right;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="w800">
+	<form th:action="@{/}" method="post">
+		<div class="padding-bot">
+		URL : <input class="w650" type="text" name="url" th:value="${param.url}"
+			placeholder="ex) http://www.google.com or google.com">
+		<input type="submit" value="변경">
+		</div>
+	</form>
+	<div class="line-top padding-top" th:if="${result == 'success'}">
+		<div class="inline">
+			<span class="ellipsis inline w350" id="url"></span>
+		</div>
+		<div class="inline">
+			<input class="input-url w350 t-right" type="text" id="shorturl" readonly="readonly">
+		</div>
+		<div class="inline">
+			<input type="button" value="복사하기" onclick="copyText()">
+		</div>
+		<script th:inline="javascript">
+			/* <![CDATA[ */
+			var shorturl = location.protocol + '//' + location.host + '/' + '[( ${url.shorturl} )]';
+			document.getElementById("shorturl").value = shorturl;
+			document.getElementById("url").innerHTML = '[( ${url.url} )]';
+
+			function copyText() {
+				var copyText = document.getElementById("shorturl");
+				copyText.select();
+				document.execCommand('Copy');
+
+				alert('복사 되었습니다.');
+			}
+			/* ]]> */
+		</script>
+	</div>
+	<div class="line-top padding-top" th:if="${result == 'empty'}">
+		<div>생성 시간이 초과되거나 더이상 생성 할 수 없습니다.</div>
+	</div>
+	<div class="line-top padding-top" th:if="${result == 'error'}">
+		<div>생성 중 오류가 발생하였습니다. 다시 시도해주시기 바랍니다.</div>
+	</div>
+	</div>
+</body>
+
+</html>

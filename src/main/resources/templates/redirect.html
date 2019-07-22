@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>URL Shortening Service</title>
+</head>
+
+<body>
+	<div th:if="${shortening}">
+		<script th:inline="javascript">
+			/* <![CDATA[ */  
+			document.location.href = '[( ${shortening.url} )]';
+			/* ]]> */
+		</script>
+	</div>
+	<div th:unless="${shortening}">
+		URL이 존재하지 않습니다.
+		<a th:href="@{/}" th:text="메인으로"></a>
+	</div>
+</body>
+
+</html>
